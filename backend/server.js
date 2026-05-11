@@ -46,6 +46,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Serve static frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(process.cwd(), 'frontend')));
+
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
 // Auth: supports both /api/auth/login and /api/login (legacy)
