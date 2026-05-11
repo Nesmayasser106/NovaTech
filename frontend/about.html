@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — GradientTech</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .about-hero {
+      padding: 80px 0 64px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-hero .section-tag { margin-bottom: 16px; }
+    .about-hero .section-title { max-width: 600px; margin: 0 auto 20px; }
+    .about-hero p { color: var(--text-3); font-size: 1.05rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    /* Stats */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin: 64px 0;
+      border: 1px solid var(--border);
+    }
+
+    .stat-block {
+      background: #120a3a;
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .stat-label { color: var(--text-3); font-size: 0.875rem; }
+
+    /* Story */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .story-img {
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .story-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .story-content .section-tag { margin-bottom: 16px; }
+    .story-content .section-title { margin-bottom: 20px; }
+
+    .story-content p {
+      color: var(--text-2);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    /* Values */
+    .values-section { padding: 80px 0; background: var(--surface-2); }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .value-card {
+      background: #120a3a;
+      border-radius: 16px;
+      padding: 32px;
+      border: 1.5px solid rgba(124, 95, 230, 0.25);
+      transition: var(--transition-slow);
+    }
+
+    .value-card:hover {
+      border-color: rgba(124, 95, 230, 0.6);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .value-icon {
+      width: 52px; height: 52px;
+      background: rgba(124, 95, 230, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .value-title { color: #f0eeff; font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .value-desc {  color: #8b7fd4; font-size: 0.875rem; line-height: 1.7; }
+
+    /* Team */
+    .team-section { padding: 80px 0; }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+
+    .team-card { text-align: center; }
+
+    .team-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      margin: 0 auto 14px;
+    }
+
+    .team-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+    .team-role { color: var(--text-3); font-size: 0.8rem; }
+
+    /* CTA */
+    .about-cta {
+      background: var(--gradient);
+      padding: 80px;
+      text-align: center;
+      margin: 0;
+    }
+
+    .about-cta h2 { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: white; margin-bottom: 14px; }
+    .about-cta p { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 32px; }
+
+    @media (max-width: 768px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .story-grid { grid-template-columns: 1fr; gap: 32px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-cta { padding: 48px 24px; }
+      .about-cta h2 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-mount"></div>
+
+  <div class="page-wrapper">
+    <!-- Hero -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="section-tag">✦ Our Story</div>
+        <h1 class="section-title">We're Obsessed With <span class="gradient-text">Great Tech</span></h1>
+        <p>Founded in 2019, GradientTech has grown from a small online store to one of the most trusted electronics retailers in the country.</p>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="container">
+      <div class="stats-strip stagger">
+        <div class="stat-block"><div class="stat-number">50K+</div><div class="stat-label">Happy Customers</div></div>
+        <div class="stat-block"><div class="stat-number">500+</div><div class="stat-label">Products Listed</div></div>
+        <div class="stat-block"><div class="stat-number">4.9★</div><div class="stat-label">Average Rating</div></div>
+        <div class="stat-block"><div class="stat-number">5yrs</div><div class="stat-label">In Business</div></div>
+      </div>
+    </div>
+
+    <!-- Story -->
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Our story">
+        </div>
+        <div class="story-content">
+          <div class="section-tag">✦ How We Started</div>
+          <h2 class="section-title">Passion for <span class="gradient-text">Technology</span></h2>
+          <p>GradientTech was born in a small apartment in 2019 when our founder, frustrated with overpriced and underperforming electronics, decided to create a different kind of tech store.</p>
+          <p>Our mission was simple: curate only the best products at fair prices, backed by genuine expertise and exceptional service. We hand-test every product before adding it to our catalog.</p>
+          <p>Today, we serve customers across the country, but our core values remain unchanged — quality, transparency, and a genuine love for great technology.</p>
+          <a href="/products.html" class="btn-primary" style="display:inline-flex;margin-top:8px">Shop Our Collection →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values -->
+    <section class="values-section">
+      <div class="container">
+        <div class="section-tag">✦ What We Stand For</div>
+        <h2 class="section-title">Our <span class="gradient-text">Values</span></h2>
+        <div class="values-grid stagger">
+          <div class="value-card">
+            <div class="value-icon">🎯</div>
+            <div class="value-title">Curated Quality</div>
+            <div class="value-desc">We handpick every product, testing it thoroughly before listing. If it doesn't meet our standards, it doesn't make the cut.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">💬</div>
+            <div class="value-title">Radical Transparency</div>
+            <div class="value-desc">Honest reviews, real specs, no hidden fees. We believe you deserve the full picture before you buy.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <div class="value-title">Customer First</div>
+            <div class="value-desc">30-day returns, lifetime support, and a team that genuinely cares about your experience — every single time.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🌍</div>
+            <div class="value-title">Sustainability</div>
+            <div class="value-desc">We prioritize eco-friendly packaging and partner with manufacturers who share our commitment to the planet.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">⚡</div>
+            <div class="value-title">Innovation</div>
+            <div class="value-desc">We're always scouting the cutting edge, bringing you the latest breakthroughs before anyone else.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🔐</div>
+            <div class="value-title">Secure & Trusted</div>
+            <div class="value-desc">Bank-level security on every transaction. Your data is yours — we never sell it, ever.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+      <div class="container">
+        <div class="section-tag">✦ The People Behind</div>
+        <h2 class="section-title">Meet Our <span class="gradient-text">Team</span></h2>
+        <div class="team-grid stagger">
+          <div class="team-card"><div class="team-avatar">AK</div><div class="team-name">Alex Kim</div><div class="team-role">Founder & CEO</div></div>
+          <div class="team-card"><div class="team-avatar">SP</div><div class="team-name">Sarah Park</div><div class="team-role">Head of Products</div></div>
+          <div class="team-card"><div class="team-avatar">MR</div><div class="team-name">Marcus Reed</div><div class="team-role">Tech Lead</div></div>
+          <div class="team-card"><div class="team-avatar">LN</div><div class="team-name">Lisa Nguyen</div><div class="team-role">Customer Success</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+      <h2>Ready to Upgrade Your Tech?</h2>
+      <p>Browse our curated collection of premium electronics and find your perfect device.</p>
+      <a href="/products.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:white;color:var(--primary);border-radius:999px;font-size:0.95rem;font-weight:700;transition:all 0.2s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        Shop Now →
+      </a>
+    </section>
+  </div>
+
+  <div id="footer-mount"></div>
+  <div id="toast-container"></div>
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = navbarHTML('about');
+    document.getElementById('footer-mount').innerHTML = footerHTML();
+    initNavbar('about');
+  </script>
+</body>
+</html>

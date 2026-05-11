@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaTech — Premium Electronics</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .hero {
+      min-height: calc(100vh - var(--nav-height));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: fixed;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(153,15,250,0.08) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--gradient-soft);
+      border: 1px solid rgba(153,15,250,0.2);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+      animation: fadeIn 0.6s 0.1s ease both;
+    }
+
+    .hero-title .line2 {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-3);
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 32px;
+      animation: fadeIn 0.6s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      animation: fadeIn 0.6s 0.3s ease both;
+    }
+
+    .hero-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-glow);
+      transition: var(--transition);
+    }
+
+    .hero-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(153,15,250,0.45);
+    }
+
+    .hero-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text);
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1.5px solid rgba(124, 95, 230, 0.4);
+      transition: var(--transition);
+    }
+
+    .hero-cta-secondary:hover {
+      border-color: #7c5fe6;
+      color: #a78bfa;
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      animation: fadeIn 0.6s 0.4s ease both;
+    }
+
+    .hero-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-stat-label { font-size: 0.8rem; color: var(--text-3); margin-top: 2px; }
+
+    .hero-visual {
+      position: relative;
+      animation: fadeIn 0.8s 0.2s ease both;
+    }
+
+    .hero-img-wrap {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--gradient-soft);
+    }
+
+    .hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-float-card {
+      position: absolute;
+      background: #120a3a;
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      border: 1px solid rgba(124,95,230,0.3);
+    }
+
+    .hero-float-card-1 {
+      bottom: -20px; left: -20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .float-icon  { font-size: 1.5rem; }
+    .float-label { font-size: 0.7rem; color: #8b7fd4; }
+    .float-val   { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: #f0eeff; }
+
+    .hero-float-card-2 {
+      top: -20px; right: -20px;
+      text-align: center;
+    }
+
+    .float-badge { font-size: 1.8rem; }
+    .float-text  { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; color: #f0eeff; }
+
+    /* CATEGORIES */
+    .categories-section { padding: 80px 0; background: #0d0826; }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .cat-card {
+      background: #120a3a;
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      border: 1.5px solid rgba(124,95,230,0.25);
+      cursor: pointer;
+      transition: var(--transition-slow);
+    }
+
+    .cat-card:hover {
+      border-color: #7c5fe6;
+      box-shadow: 0 0 24px rgba(124,95,230,0.2);
+      transform: translateY(-4px);
+    }
+
+    .cat-icon  { font-size: 2.2rem; margin-bottom: 10px; }
+    .cat-name  { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; color: #f0eeff; }
+    .cat-count { font-size: 0.72rem; color: #5a4fa0; margin-top: 3px; }
+
+    /* FEATURED */
+    .featured-section { padding: 80px 0; }
+
+    .featured-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .view-all {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #a78bfa;
+      transition: var(--transition);
+    }
+
+    .view-all:hover { gap: 10px; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* PROMO */
+    .promo-banner {
+      margin: 0 0 80px;
+      border-radius: 24px;
+      background: var(--gradient);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .promo-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 20%;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .promo-tag   { color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+    .promo-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 12px; }
+    .promo-sub   { color: rgba(255,255,255,0.8); font-size: 1rem; }
+
+    .promo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: white;
+      color: var(--primary);
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .promo-btn:hover { transform: scale(1.04); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    @media (max-width: 1024px) {
+      .products-grid    { grid-template-columns: repeat(3, 1fr); }
+      .categories-grid  { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .hero             { grid-template-columns: 1fr; text-align: center; padding: 48px 24px; }
+      .hero-desc        { max-width: 100%; }
+      .hero-ctas        { justify-content: center; }
+      .hero-stats       { justify-content: center; }
+      .hero-visual      { display: none; }
+      .products-grid    { grid-template-columns: repeat(2, 1fr); }
+      .categories-grid  { grid-template-columns: repeat(3, 1fr); }
+      .promo-banner     { grid-template-columns: 1fr; padding: 36px 24px; }
+      .featured-header  { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid   { grid-template-columns: 1fr; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-mount"></div>
+
+  <div class="page-wrapper">
+    <section>
+      <div class="hero">
+        <div class="hero-content">
+          <div class="hero-eyebrow">✦ New Arrivals 2024</div>
+          <h1 class="hero-title">
+            Tech That<br>
+            <span class="line2">Changes</span><br>
+            Everything.
+          </h1>
+          <p class="hero-desc">Discover the latest in premium electronics — from noise-canceling headphones to flagship smartphones, curated for those who demand the best.</p>
+          <div class="hero-ctas">
+            <a href="/products.html" class="hero-cta-primary">Explore Products →</a>
+            <a href="/about.html"    class="hero-cta-secondary">Our Story</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="hero-stat-num">500+</div>
+              <div class="hero-stat-label">Products</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">50K+</div>
+              <div class="hero-stat-label">Customers</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">4.9★</div>
+              <div class="hero-stat-label">Avg Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-img-wrap">
+            <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&q=80" alt="Premium Electronics">
+          </div>
+          <div class="hero-float-card hero-float-card-1">
+            <div class="float-icon">🚀</div>
+            <div>
+              <div class="float-label">Fast Shipping</div>
+              <div class="float-val">Free over $500</div>
+            </div>
+          </div>
+          <div class="hero-float-card hero-float-card-2">
+            <div class="float-badge">⭐</div>
+            <div class="float-text">Top Rated</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="categories-section">
+      <div class="container">
+        <div class="section-tag">✦ Browse by Category</div>
+        <div class="section-title">Find What You <span class="gradient-text">Need</span></div>
+        <div class="categories-grid stagger" id="categories-grid">
+          <div class="loading-wrap"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-section">
+      <div class="container">
+        <div class="featured-header">
+          <div>
+            <div class="section-tag">✦ Handpicked For You</div>
+            <div class="section-title">Featured <span class="gradient-text">Products</span></div>
+          </div>
+          <a href="/products.html" class="view-all">View All Products →</a>
+        </div>
+        <div class="products-grid stagger" id="featured-grid">
+          <div class="loading-wrap" style="grid-column:1/-1"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="promo-banner">
+        <div>
+          <div class="promo-tag">✦ Limited Time Offer</div>
+          <div class="promo-title">Free Shipping<br>on Orders $500+</div>
+          <div class="promo-sub">Plus 30-day hassle-free returns on all products.</div>
+        </div>
+        <a href="/products.html" class="promo-btn">Shop Now →</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-mount"></div>
+  <div id="toast-container"></div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = navbarHTML('home');
+    document.getElementById('footer-mount').innerHTML = footerHTML();
+    initNavbar('home');
+
+    const CAT_ICONS = {
+      'Audio': '🎧', 'Laptops': '💻', 'Smartphones': '📱',
+      'Tablets': '📱', 'Cameras': '📷', 'Wearables': '⌚'
+    };
+
+    async function loadHome() {
+      try {
+        const data = await apiFetch('/products?limit=4&sort=rating');
+
+        const grid = document.getElementById('featured-grid');
+        if (data.products.length) {
+          grid.innerHTML = data.products.map(p => renderProductCard(p)).join('');
+        } else {
+          grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div><h3>No products yet</h3></div>';
+        }
+
+        const catGrid  = document.getElementById('categories-grid');
+        const allData  = await apiFetch('/products');
+        const catCounts = {};
+        allData.products.forEach(p => {
+          catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+        });
+
+        catGrid.innerHTML = Object.entries(catCounts).map(([cat, count]) => `
+          <div class="cat-card" onclick="window.location.href='/products.html?category=${cat.toLowerCase()}'">
+            <div class="cat-icon">${CAT_ICONS[cat] || '📦'}</div>
+            <div class="cat-name">${cat}</div>
+            <div class="cat-count">${count} item${count !== 1 ? 's' : ''}</div>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('featured-grid').innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <div class="empty-icon">⚠️</div>
+            <h3>Could not load products</h3>
+            <p>Make sure the backend server is running on port 3000.</p>
+          </div>`;
+      }
+    }
+
+    loadHome();
+  </script>
+</body>
+</html>

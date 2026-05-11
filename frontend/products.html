@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — GradientTech</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .products-page { padding: 48px 0 80px; }
+
+    .page-header {
+      padding: 72px 0 60px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    .page-header-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .page-title { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 800; margin-bottom: 6px; }
+    .page-subtitle { color: var(--text-3); font-size: 0.95rem; }
+
+    /* Toolbar */
+    .products-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .search-bar {
+      flex: 1;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(30, 15, 102, 0.4);
+      border: 1.5px solid rgba(124, 95, 230, 0.3);
+      border-radius: 9999px;
+      padding: 10px 18px;
+      transition: var(--transition);
+    }
+
+
+    .search-bar:focus-within { border-color: #7c5fe6; box-shadow: 0 0 0 3px rgba(124, 95, 230, 0.15);; }
+    .search-bar input { border: none; outline: none; font-size: 0.9rem; flex: 1; color: var(--text); background: transparent; }
+    .search-bar input::placeholder { color: var(--text-4); }
+
+    .filter-select {
+      padding: 10px 16px;
+      border: 1.5px solid rgba(124, 95, 230, 0.3);
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #f8f8f9;
+      background: rgba(30, 15, 102, 0.4);
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition);
+      -webkit-appearance: none;
+      appearance: none;
+      padding-right: 32px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239CA3AF' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    .filter-select:focus { border-color: var(--primary); }
+
+    .results-count { font-size: 0.875rem; color: var(--text-3); }
+    .results-count strong { color: var(--text); }
+
+    /* Category pills */
+    .cat-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 0 0 20px;
+    }
+
+    .cat-pill {
+      padding: 6px 18px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1.5px solid rgba(124, 95, 230, 0.3);
+      background: rgba(30, 15, 102, 0.4);
+      color: #fcfcfc;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .cat-pill:hover { border-color: #7c5fe6; color: #a78bfa; }
+    .cat-pill.active { background: linear-gradient(135deg, #1e0f66, #7c5fe6); color: white; border-color: transparent; box-shadow: 0 2px 12px rgba(153,15,250,0.3); }
+
+    /* Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 1100px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="navbar-mount"></div>
+
+  <div class="page-wrapper">
+    <div class="page-header">
+      <div class="container">
+        <div class="page-header-inner">
+          <div>
+            <div class="section-tag">✦ Our Collection</div>
+            <h1 class="page-title">All <span class="gradient-text">Products</span></h1>
+            <p class="page-subtitle">Discover our curated selection of premium electronics</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-page">
+      <div class="container">
+        <div class="products-toolbar">
+          <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" id="search-input" placeholder="Search products..." />
+          </div>
+          <select class="filter-select" id="sort-select">
+            <option value="">Sort: Featured</option>
+            <option value="rating">Highest Rated</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="name">Name A–Z</option>
+          </select>
+          <div class="results-count" id="results-count">Loading...</div>
+        </div>
+
+        <div class="cat-pills" id="cat-pills">
+          <button class="cat-pill active" data-cat="all">All Products</button>
+        </div>
+
+        <div class="products-grid stagger" id="products-grid">
+          <div class="loading-wrap" style="grid-column:1/-1">
+            <div class="spinner"></div>
+            <span>Loading products...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-mount"></div>
+  <div id="toast-container"></div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = navbarHTML('products');
+    document.getElementById('footer-mount').innerHTML = footerHTML();
+    initNavbar('products');
+
+    let allProducts = [];
+    let categories = [];
+    let activeCategory = 'all';
+
+    // Read URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('category')) activeCategory = urlParams.get('category');
+    if (urlParams.get('search')) document.getElementById('search-input').value = urlParams.get('search');
+
+    async function loadProducts() {
+      try {
+        const data = await apiFetch('/products');
+        allProducts = data.products;
+        categories = data.categories;
+
+        // Build category pills
+        const pills = document.getElementById('cat-pills');
+        pills.innerHTML = `<button class="cat-pill ${activeCategory === 'all' ? 'active' : ''}" data-cat="all">All Products</button>`;
+        categories.forEach(cat => {
+          pills.innerHTML += `<button class="cat-pill ${activeCategory === cat.toLowerCase() ? 'active' : ''}" data-cat="${cat.toLowerCase()}">${cat}</button>`;
+        });
+
+        pills.querySelectorAll('.cat-pill').forEach(pill => {
+          pill.addEventListener('click', () => {
+            activeCategory = pill.dataset.cat;
+            pills.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            renderProducts();
+          });
+        });
+
+        renderProducts();
+      } catch (err) {
+        document.getElementById('products-grid').innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <div class="empty-icon">⚠️</div>
+            <h3>Failed to load products</h3>
+            <p>Please ensure the backend server is running at localhost:3000</p>
+          </div>`;
+      }
+    }
+
+    function renderProducts() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const sort = document.getElementById('sort-select').value;
+
+      let filtered = [...allProducts];
+
+      if (activeCategory !== 'all') {
+        filtered = filtered.filter(p => p.category.toLowerCase() === activeCategory);
+      }
+
+      if (search) {
+        filtered = filtered.filter(p =>
+          p.name.toLowerCase().includes(search) ||
+          p.description.toLowerCase().includes(search)
+        );
+      }
+
+      if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (sort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+      else if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+      document.getElementById('results-count').innerHTML =
+        `<strong>${filtered.length}</strong> product${filtered.length !== 1 ? 's' : ''} found`;
+
+      const grid = document.getElementById('products-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <div class="empty-icon">🔍</div>
+            <h3>No products found</h3>
+            <p>Try adjusting your search or filter criteria.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => renderProductCard(p)).join('');
+    }
+
+    let searchTimer;
+    document.getElementById('search-input').addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(renderProducts, 300);
+    });
+
+    document.getElementById('sort-select').addEventListener('change', renderProducts);
+
+    loadProducts();
+  </script>
+</body>
+</html>

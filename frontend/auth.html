@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — NovaTech</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .auth-visual {
+      background: var(--gradient);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 40px;
+    }
+
+    .auth-visual::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .auth-visual::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 350px; height: 350px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0;
+    }
+
+    .auth-visual-content {
+      position: relative;
+      z-index: 1;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .auth-visual h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .auth-visual p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .auth-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .auth-feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+    }
+
+    .auth-feature-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .auth-feature-text h4 { color: white; font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+    .auth-feature-text p  { color: rgba(255,255,255,0.7); font-size: 0.78rem; }
+
+    .auth-footer-copy {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+    }
+
+    .auth-form-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      background: #0d0826;
+    }
+
+    .auth-form-wrap {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: rgba(30,15,102,0.5);
+      border-radius: 16px;
+      padding: 4px;
+      margin-bottom: 36px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 13px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: #8b7fd4;
+    }
+
+    .auth-tab.active {
+      background: linear-gradient(135deg, #1e0f66, #7c5fe6);
+      color: white;
+      box-shadow: 0 2px 12px rgba(124,95,230,0.3);
+    }
+
+    .auth-form { animation: fadeIn 0.25s ease; }
+
+    .auth-form-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #f0eeff;
+    }
+
+    .auth-form-sub {
+      color: #8b7fd4;
+      font-size: 0.875rem;
+      margin-bottom: 28px;
+    }
+
+    .password-wrap { position: relative; }
+
+    .pw-toggle {
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: #5a4fa0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .pw-toggle:hover { color: #a78bfa; }
+
+    .auth-submit {
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, #1e0f66, #7c5fe6);
+      color: white;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(124,95,230,0.35);
+      margin-top: 8px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .auth-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(124,95,230,0.5);
+    }
+
+    .auth-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .auth-switch {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #8b7fd4;
+      margin-top: 20px;
+    }
+
+    .auth-switch a {
+      color: #a78bfa;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .auth-switch a:hover { color: #ffffff; }
+
+    .error-alert {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: #f87171;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .form-label { color: #c4b8ff; }
+
+    .form-input {
+      padding: 15px 20px;
+      font-size: 1rem;
+      border-radius: 14px;
+      background: rgba(30,15,102,0.4);
+      border: 1.5px solid rgba(124,95,230,0.3);
+      color: #f0eeff;
+    }
+
+    .form-input:focus {
+      border-color: #7c5fe6;
+      box-shadow: 0 0 0 3px rgba(124,95,230,0.15);
+    }
+
+    .form-input::placeholder { color: #5a4fa0; }
+
+    @media (max-width: 900px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-visual { display: none; }
+      .auth-form-panel { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+
+    <div class="auth-visual">
+
+      <a href="/index.html" class="auth-logo">
+        <img src="/images/logo.svg" alt="NovaTech Store" style="height:100px; display:block;">
+      </a>
+
+      <div class="auth-visual-content">
+        <h2>Your Tech<br>Journey Starts<br>Here.</h2>
+        <p>Join thousands of customers who trust NovaTech for premium electronics.</p>
+
+        <div class="auth-features">
+          <div class="auth-feature">
+            <div class="auth-feature-icon"></div>
+            <div class="auth-feature-text">
+              <h4>Free Shipping</h4>
+              <p>On all orders over $500</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon"></div>
+            <div class="auth-feature-text">
+              <h4>2-Year Warranty</h4>
+              <p>Every product covered</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon"></div>
+            <div class="auth-feature-text">
+              <h4>30-Day Returns</h4>
+              <p>Hassle-free, no questions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-footer-copy">© 2024 NovaTech. All rights reserved.</div>
+
+    </div>
+
+    <div class="auth-form-panel">
+      <div class="auth-form-wrap">
+
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Sign In</div>
+          <div class="auth-tab" id="tab-register" onclick="switchTab('register')">Create Account</div>
+        </div>
+
+        <div class="auth-form" id="form-login">
+          <h2 class="auth-form-title">Welcome back</h2>
+          <p class="auth-form-sub">Sign in to your account to continue</p>
+
+          <div class="error-alert" id="login-error"></div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" id="login-email" type="email"
+              placeholder="you@example.com" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="password-wrap">
+              <input class="form-input" id="login-password" type="password"
+                placeholder="Your password" style="padding-right:50px"
+                autocomplete="current-password">
+              <span class="pw-toggle" onclick="togglePw('login-password', this)">Show</span>
+            </div>
+          </div>
+
+          <button class="auth-submit" id="login-btn" onclick="doLogin()">
+            Sign In →
+          </button>
+
+          <div class="auth-switch">
+            Don't have an account?
+            <a onclick="switchTab('register')">Create one free</a>
+          </div>
+        </div>
+
+        <div class="auth-form" id="form-register" style="display:none">
+          <h2 class="auth-form-title">Create account</h2>
+          <p class="auth-form-sub">Join NovaTech and start shopping</p>
+
+          <div class="error-alert" id="register-error"></div>
+
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" id="reg-name" type="text"
+              placeholder="John Doe" autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" id="reg-email" type="email"
+              placeholder="you@example.com" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="password-wrap">
+              <input class="form-input" id="reg-password" type="password"
+                placeholder="At least 6 characters" style="padding-right:50px"
+                autocomplete="new-password">
+              <span class="pw-toggle" onclick="togglePw('reg-password', this)">Show</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input class="form-input" id="reg-confirm" type="password"
+              placeholder="Repeat password" autocomplete="new-password">
+          </div>
+
+          <button class="auth-submit" id="register-btn" onclick="doRegister()">
+            Create Account →
+          </button>
+
+          <div class="auth-switch">
+            Already have an account?
+            <a onclick="switchTab('login')">Sign in</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="/js/main.js"></script>
+  <script>
+    if (Auth.isLoggedIn()) {
+      window.location.href = '/index.html';
+    }
+
+    const tab = new URLSearchParams(window.location.search).get('tab');
+    if (tab === 'register') switchTab('register');
+
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('form-login').style.display    = isLogin ? 'block' : 'none';
+      document.getElementById('form-register').style.display = isLogin ? 'none'  : 'block';
+      document.getElementById('tab-login').classList.toggle('active',  isLogin);
+      document.getElementById('tab-register').classList.toggle('active', !isLogin);
+    }
+
+    function togglePw(inputId, btn) {
+      const input    = document.getElementById(inputId);
+      const isHidden = input.type === 'password';
+      input.type     = isHidden ? 'text' : 'password';
+      btn.textContent = isHidden ? 'Hide' : 'Show';
+    }
+
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent   = msg;
+      el.style.display = 'block';
+    }
+
+    function clearError(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    async function doLogin() {
+      clearError('login-error');
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        showError('login-error', 'Email and password are required');
+        return;
+      }
+
+      const btn = document.getElementById('login-btn');
+      btn.disabled    = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        const data = await apiFetch('/login', {
+          method: 'POST',
+          body: JSON.stringify({ email, password })
+        });
+        Auth.setSession(data.token, data.user);
+        showToast(`Welcome back, ${data.user.name}!`, 'success', '👋');
+        setTimeout(() => window.location.href = '/index.html', 800);
+      } catch (err) {
+        showError('login-error', err.message);
+        btn.disabled    = false;
+        btn.textContent = 'Sign In →';
+      }
+    }
+
+    async function doRegister() {
+      clearError('register-error');
+      const name     = document.getElementById('reg-name').value.trim();
+      const email    = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const confirm  = document.getElementById('reg-confirm').value;
+
+      if (!name || !email || !password || !confirm) {
+        showError('register-error', 'All fields are required'); return;
+      }
+      if (password !== confirm) {
+        showError('register-error', 'Passwords do not match'); return;
+      }
+      if (password.length < 6) {
+        showError('register-error', 'Password must be at least 6 characters'); return;
+      }
+
+      const btn = document.getElementById('register-btn');
+      btn.disabled    = true;
+      btn.textContent = 'Creating account...';
+
+      try {
+        const data = await apiFetch('/register', {
+          method: 'POST',
+          body: JSON.stringify({ name, email, password })
+        });
+        Auth.setSession(data.token, data.user);
+        showToast(`Welcome to NovaTech, ${data.user.name}!`, 'success', '🎉');
+        setTimeout(() => window.location.href = '/index.html', 800);
+      } catch (err) {
+        showError('register-error', err.message);
+        btn.disabled    = false;
+        btn.textContent = 'Create Account →';
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const loginVisible = document.getElementById('form-login').style.display !== 'none';
+        loginVisible ? doLogin() : doRegister();
+      }
+    });
+  </script>
+</body>
+</html>

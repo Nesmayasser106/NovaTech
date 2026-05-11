@@ -1,0 +1,199 @@
+{
+  "users": [
+    {
+      "id": "cb395522-b180-4860-adb2-7be07c685ec0",
+      "name": "nesma yasser",
+      "email": "nesmahamada68@gmail.com",
+      "password": "$2a$12$8TI7x3MKPPQxWIAipZKvsuzaJtB4bVeAX08M/e90zd7ZkjZB1vmhO",
+      "role": "customer",
+      "createdAt": "2026-05-04T00:21:14.444Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "Sony WH-1000XM5",
+      "category": "Audio",
+      "price": 349.99,
+      "originalPrice": 429.99,
+      "image": "/images/products/headphones.jpg",
+      "description": "Industry-leading noise canceling headphones with 30-hour battery life, crystal-clear hands-free calling, and exceptional sound quality. Features dual noise sensor technology and Auto NC Optimizer for adaptive noise cancellation.",
+      "specs": {
+        "Battery": "30 hours",
+        "Connectivity": "Bluetooth 5.2",
+        "Weight": "250g",
+        "Driver": "40mm"
+      },
+      "rating": 4.8,
+      "reviews": 2341,
+      "stock": 15,
+      "badge": "Best Seller"
+    },
+    {
+      "id": "p2",
+      "name": "Apple MacBook Pro 14",
+      "category": "Laptops",
+      "price": 1999.99,
+      "originalPrice": 2199.99,
+      "image": "/images/products/Apple MacBook Pro 14.jpg",
+      "description": "Supercharged by M3 Pro chip with up to 18-hour battery. Features Liquid Retina XDR display, advanced camera system, and studio-quality three-mic array. The ultimate pro laptop.",
+      "specs": {
+        "Chip": "Apple M3 Pro",
+        "RAM": "18GB Unified",
+        "Storage": "512GB SSD",
+        "Display": "14.2\" Liquid Retina XDR"
+      },
+      "rating": 4.9,
+      "reviews": 876,
+      "stock": 8,
+      "badge": "New"
+    },
+    {
+      "id": "p3",
+      "name": "Samsung Galaxy S24 Ultra",
+      "category": "Smartphones",
+      "price": 1199.99,
+      "originalPrice": 1299.99,
+      "image": "/images/products/Samsung Galaxy S24 Ultra.jpg",
+      "description": "The ultimate Galaxy experience with Galaxy AI, integrated S Pen, 200MP camera, and titanium frame. Built for productivity and creativity on the go.",
+      "specs": {
+        "Display": "6.8\" Dynamic AMOLED",
+        "Camera": "200MP Quad",
+        "Battery": "5000mAh",
+        "Storage": "256GB"
+      },
+      "rating": 4.7,
+      "reviews": 1543,
+      "stock": 22,
+      "badge": "Hot"
+    },
+    {
+      "id": "p4",
+      "name": "iPad Pro 12.9",
+      "category": "Tablets",
+      "price": 1099.99,
+      "originalPrice": 1199.99,
+      "image": "/images/products/iPad Pro 12.9.jpg",
+      "description": "The ultimate iPad with M2 chip, Liquid Retina XDR display, and Apple Pencil hover. Thin, light, and incredibly powerful for both creative and professional work.",
+      "specs": {
+        "Chip": "Apple M2",
+        "Display": "12.9\" Liquid Retina XDR",
+        "Storage": "256GB",
+        "Connectivity": "Wi-Fi 6E + 5G"
+      },
+      "rating": 4.8,
+      "reviews": 654,
+      "stock": 11,
+      "badge": ""
+    },
+    {
+      "id": "p5",
+      "name": "Sony A7 IV Mirrorless",
+      "category": "Cameras",
+      "price": 2499.99,
+      "originalPrice": 2699.99,
+      "image": "/images/products/Sony A7 IV Mirrorless.jpg",
+      "description": "33MP full-frame BSI CMOS sensor with real-time Eye AF, 4K 60p video, and 10fps continuous shooting. The perfect hybrid camera for both photo and video professionals.",
+      "specs": {
+        "Sensor": "33MP Full-Frame BSI",
+        "Video": "4K 60p",
+        "ISO": "100-51200",
+        "Stabilization": "5-Axis IBIS"
+      },
+      "rating": 4.9,
+      "reviews": 432,
+      "stock": 5,
+      "badge": "Pro"
+    },
+    {
+      "id": "p6",
+      "name": "Apple Watch Ultra 2",
+      "category": "Wearables",
+      "price": 799.99,
+      "originalPrice": 849.99,
+      "image": "/images/products/Apple Watch Ultra 2.jpg",
+      "description": "The most rugged and capable Apple Watch with precision dual-frequency GPS, 3000 nits brightness, and 60-hour battery in low power mode. Built for extreme adventures.",
+      "specs": {
+        "Case": "49mm Titanium",
+        "Battery": "60 hours (low power)",
+        "Display": "3000 nits LTPO OLED",
+        "Water": "100m depth"
+      },
+      "rating": 4.7,
+      "reviews": 987,
+      "stock": 19,
+      "badge": "Sale"
+    },
+    {
+      "id": "p7",
+      "name": "ASUS ROG Zephyrus G14",
+      "category": "Laptops",
+      "price": 1549.99,
+      "originalPrice": 1799.99,
+      "image": "/images/products/ASUS ROG Zephyrus G14.jpg",
+      "description": "Compact gaming powerhouse with Ryzen 9 and RTX 4060, featuring 2560x1600 165Hz display, AniMe Matrix LED lid, and impressive 10-hour battery life.",
+      "specs": {
+        "CPU": "AMD Ryzen 9 7940HS",
+        "GPU": "RTX 4060 8GB",
+        "RAM": "16GB DDR5",
+        "Display": "14\" QHD+ 165Hz"
+      },
+      "rating": 4.6,
+      "reviews": 765,
+      "stock": 7,
+      "badge": "Gaming"
+    },
+    {
+      "id": "p8",
+      "name": "Bose QuietComfort Earbuds II",
+      "category": "Audio",
+      "price": 249.99,
+      "originalPrice": 299.99,
+      "image": "/images/products/Bose QuietComfort Earbuds II.jpg",
+      "description": "World's best noise cancelling earbuds with CustomTune technology that personalizes sound and noise cancellation to your unique ear geometry for the perfect fit.",
+      "specs": {
+        "ANC": "CustomTune personalized",
+        "Battery": "6h + 18h case",
+        "Driver": "Custom 9.3mm",
+        "IPX": "IPX4"
+      },
+      "rating": 4.7,
+      "reviews": 1876,
+      "stock": 34,
+      "badge": ""
+    }
+  ],
+  "orders": [
+    {
+      "id": "8231d04f-8de2-4a66-8435-9c0366173320",
+      "orderNumber": "GE-1777854145099",
+      "userId": "cb395522-b180-4860-adb2-7be07c685ec0",
+      "userEmail": "nesmahamada68@gmail.com",
+      "userName": "nesma yasser",
+      "items": [
+        {
+          "productId": "p1",
+          "name": "Sony WH-1000XM5",
+          "price": 349.99,
+          "quantity": 1,
+          "image": "/images/products/Sony WH-1000XM5.jpg",
+          "total": 349.99
+        }
+      ],
+      "shipping": {
+        "name": "nesma yasser",
+        "address": "al-mahmodia behira",
+        "city": "El-mahmdia",
+        "zip": "10001"
+      },
+      "paymentMethod": "card",
+      "subtotal": 349.99,
+      "shippingCost": 19.99,
+      "tax": 28,
+      "total": 397.98,
+      "status": "confirmed",
+      "createdAt": "2026-05-04T00:22:25.100Z",
+      "estimatedDelivery": "2026-05-09T00:22:25.100Z"
+    }
+  ]
+}
